@@ -1,10 +1,8 @@
-package com.example.projetosts;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
+package projetosts;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import projetosts.domain.Categoria;
 
 @SpringBootApplication
 public class ProjetoStsApplication {
@@ -13,5 +11,12 @@ public class ProjetoStsApplication {
 		SpringApplication.run(ProjetoStsApplication.class, args);
 		
 	}
+	
+//	@Override
+//	public void run(String... args) throws Exception {
+//		
+//		Categoria cat1 = new Categoria(null, "Gamer");
+//		Categoria cat2 = new Categoria(null, "Educação");
+//	}
 	
 }
