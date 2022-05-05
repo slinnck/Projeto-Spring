@@ -15,9 +15,9 @@ import javax.persistence.ManyToMany;
 
 @Entity
 public class Produto implements Serializable {
-	private Long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
-	@Id
+	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
