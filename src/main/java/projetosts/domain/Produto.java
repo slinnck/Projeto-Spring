@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -21,8 +23,9 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private double preco;
+	private Double preco;
 	
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", 
 		joinColumns = @JoinColumn(name = "produto_id"),
@@ -35,7 +38,7 @@ public class Produto implements Serializable {
 		
 	}
 	
-	public Produto (Integer id, String nome, double preco) {
+	public Produto (Integer id, String nome, Double preco) {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
@@ -66,11 +69,11 @@ public class Produto implements Serializable {
 		this.nome = nome;
 	}
 	
-	public double getPreco(double preco) {
+	public double getPreco(Double preco) {
 		return this.preco;
 	}
 	
-	public void setPreco (double preco) {
+	public void setPreco (Double preco) {
 		this.preco = preco;
 	}
 

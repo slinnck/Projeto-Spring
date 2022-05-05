@@ -36,15 +36,17 @@ public class ProjetoStsApplication implements CommandLineRunner {
 		Produto p1 = new Produto(null, "FunkoPop", 259.90);
 		Produto p2 = new Produto(null, "Quadro Personalizado", 59.90);
 		Produto p3 = new Produto(null, "Camisa Jujutsu Kaisen", 79.90);
+		Produto p4 = new Produto(null, "Camisa Polo", 69.90);
 		
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-		cat2.getProdutos().addAll(Arrays.asList(p3));
+		cat2.getProdutos().addAll(Arrays.asList(p3, p4));
 		
 		p1.getCategorias().addAll(Arrays.asList(cat1));
 		p2.getCategorias().addAll(Arrays.asList(cat1));
 		p3.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		p4.getCategorias().addAll(Arrays.asList(cat2));
 		
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
 		
 		
 	}
