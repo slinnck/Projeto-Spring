@@ -8,10 +8,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import projetosts.domain.Categoria;
 import projetosts.domain.Cidade;
+import projetosts.domain.Cliente;
+import projetosts.domain.Endereco;
 import projetosts.domain.Estado;
 import projetosts.domain.Produto;
+import projetosts.domain.enums.TipoCliente;
 import projetosts.repositories.CategoriaRepository;
 import projetosts.repositories.CidadeRepository;
+import projetosts.repositories.ClienteRepository;
+import projetosts.repositories.EnderecoRepository;
 import projetosts.repositories.EstadoRepository;
 import projetosts.repositories.ProdutoRepository;
 
@@ -29,6 +34,12 @@ public class ProjetoStsApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	
+	@Autowired 
+	private ClienteRepository clienteRepository;
+	
+	@Autowired 
+	private EnderecoRepository enderecoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoStsApplication.class, args);
@@ -71,7 +82,15 @@ public class ProjetoStsApplication implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 
+		Cliente cli1 = new Cliente(null, "João das Neves", "vocenaosabedenada@gmail.com", "324.965.400-00", TipoCliente.PESSOAFISICA);
+		cli1.getTelefones().addAll(Arrays.asList("99999-9999", "98888-8888"));
 		
+		Endereco e1 = new Endereco(null, "Rua do Norte", "99", "Casa A", "Nordeste", "59042-240", cli1, c1);
+		Endereco e2 = new Endereco(null, "Travessa Galileu Galilei", "89", "Apt03", "Universidade", "68903-753", cli1, c2);
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		
 	}
 	

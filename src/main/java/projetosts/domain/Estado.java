@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Estado implements Serializable {
-	private static final Long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,7 +30,6 @@ public class Estado implements Serializable {
 	public Estado (Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;
-		this.cidades = cidades;
 	}
 	
 	public Integer getId() {
