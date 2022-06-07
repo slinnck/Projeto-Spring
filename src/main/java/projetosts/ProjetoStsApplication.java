@@ -1,4 +1,5 @@
 package projetosts;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,20 @@ import projetosts.domain.Cidade;
 import projetosts.domain.Cliente;
 import projetosts.domain.Endereco;
 import projetosts.domain.Estado;
+import projetosts.domain.Pagamento;
+import projetosts.domain.PagamentoComBoleto;
+import projetosts.domain.PagamentoComCartao;
+import projetosts.domain.Pedido;
 import projetosts.domain.Produto;
+import projetosts.domain.enums.EstadoPagamento;
 import projetosts.domain.enums.TipoCliente;
 import projetosts.repositories.CategoriaRepository;
 import projetosts.repositories.CidadeRepository;
 import projetosts.repositories.ClienteRepository;
 import projetosts.repositories.EnderecoRepository;
 import projetosts.repositories.EstadoRepository;
+import projetosts.repositories.PagamentoRepository;
+import projetosts.repositories.PedidoRepository;
 import projetosts.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -40,6 +48,13 @@ public class ProjetoStsApplication implements CommandLineRunner {
 	
 	@Autowired 
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private PagamentoRepository pagamentoRepository;
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoStsApplication.class, args);
@@ -91,6 +106,21 @@ public class ProjetoStsApplication implements CommandLineRunner {
 		
 		clienteRepository.saveAll(Arrays.asList(cli1));
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy HH:mm");
+		Pedido ped1 = new Pedido(null, sdf.parse("21/04/2022 15:44"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("22/05/2022 10:52"), cli1, e2);
+		
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+		
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("01/06/2022 00:00"), null);
+		ped2.setPagamento(pagto2);
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
 		
 	}
 	

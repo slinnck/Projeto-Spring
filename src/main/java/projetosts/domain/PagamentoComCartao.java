@@ -1,7 +1,10 @@
 package projetosts.domain;
 
+import javax.persistence.Entity;
+
 import projetosts.domain.enums.EstadoPagamento;
 
+@Entity
 public class PagamentoComCartao extends Pagamento {
 	public static final long serialVersionUID = 1L;
 	
