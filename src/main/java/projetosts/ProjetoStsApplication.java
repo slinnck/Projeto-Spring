@@ -129,7 +129,7 @@ public class ProjetoStsApplication implements CommandLineRunner {
 		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 259.90);
 		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 79.90);
 		ItemPedido ip3 = new ItemPedido(ped2, p2, 0.00, 1, 59.90);
-		
+	
 		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
 		ped2.getItens().addAll(Arrays.asList(ip3));
 		
